@@ -1,0 +1,31 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-1 " style="color: white;background-color: #1e293b;">Employee Profile</div>
+  <!-- <div class="page__content shadow p-3 position-relative"> -->
+    <div class="page__content-data position-absolute text-center">
+      <div class="card">
+        <div class="card-body" >
+          <div style="margin-right: 60px; padding-top: 20px;">
+            <img [src]='employee.emp_image' />
+          </div>
+          <div>
+            <h3>
+              {{ employee.e_name }}<hr>
+            </h3>
+            
+          <div class="info"> 
+              <div class="info-cell">Employee ID: <span class="emp-details">{{employee.e_id}}</span></div>
+              <div class="info-cell">POD ID: <span class="emp-details">{{employee.pod_id}}</span></div>
+              <div class="info-cell">Manager ID: <span class="emp-details">{{employee.manager_id}}</span></div>
+          </div>
+            
+          <button> <a routerLink="/emp/employeelist/edit/{{ employee.e_id }}">Edit</a></button>
+          <button style="margin-left:10px;"> <a routerLink="/dashboard">Employee List</a></button>
+          </div>
+        </div>
+      </div>
+      
+      <app-empskills></app-empskills>
+    </div>
+  <!-- </div> -->
+</div>
+

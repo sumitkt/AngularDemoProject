@@ -1,0 +1,33 @@
+
+
+<div class="overview">
+  
+  <div style="text-align:left; margin-bottom: 5px;">
+    <button (click)='create()'>Add New</button>
+  </div>
+  <div class="overview-head">
+    <div class="overview-cell center" style="padding: 10px;">Employee ID</div>
+    <div class="overview-cell center" style="padding: 10px;">Employee Name</div>
+    <div class="overview-cell center" style="padding: 10px;">POD ID</div>
+    <div class="overview-cell center" style="padding: 10px;">Manager ID</div>
+    <div class="overview-cell center" style="padding: 10px;"></div>
+    <div class="overview-cell center" style="padding: 10px;"></div>
+  </div> 
+  
+
+  <div class="overview-row" *ngFor = "let emp of employees"> 
+    <div class="overview-cell center">{{ emp.e_id}}</div>
+    <div class="overview-cell center">{{ emp.e_name}}</div>
+    <div class="overview-cell center">{{ emp.pod_id}}</div>
+    <div class="overview-cell center">{{ emp.manager_id}}</div>
+    <div class="overview-cell center">
+     <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ emp.e_id }}">Details</a></button>
+     <button> <a routerLink="/emp/employeelist/edit/{{ emp.e_id }}">Edit</a></button>
+    </div>
+    
+
+  </div>
+    
+      
+</div>
+

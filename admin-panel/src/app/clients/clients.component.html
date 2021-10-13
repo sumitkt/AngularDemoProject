@@ -1,0 +1,43 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-1 " style="color: white;">Client View</div>
+    <!-- <div class="page__content shadow p-3 position-relative"> -->
+      <div class="page__content-data position-absolute text-center">
+        <div class="overview">
+            <div style="text-align: center;padding: 15px;">
+                <button (click)='create()'>Add New</button>
+              </div>
+            
+            <div class="overview-head">
+              <div class="overview-cell center" style="padding: 10px;">Client Id</div>
+              <div class="overview-cell center" style="padding: 10px;">Client Name </div>
+              <!-- <div class="overview-cell center" style="padding: 10px;">POD ID</div> -->
+              <div class="overview-cell center" style="padding: 10px;">Phone</div>
+              <div class="overview-cell center" style="padding: 10px;">Email</div>
+              <div class="overview-cell center" style="padding: 10px;"></div>
+              <div class="overview-cell center" style="padding: 10px;"></div>
+            </div> 
+           
+          
+            <div class="overview-row" *ngFor = "let c of clients"> 
+              <div class="overview-cell center">{{ c.customer_id }}</div>
+              <div class="overview-cell center">{{ c.customer_name }}</div>
+              <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
+              <div class="overview-cell center">{{ c.phone_no}}</div>
+              <div class="overview-cell center">{{ c.email_id}}</div>
+              <div class="overview-cell center">
+               <button style="margin-right: 10px;"> <a routerLink="/projectof/{{c.customer_name}}">Details</a></button>
+               <button> <a routerLink="">Edit</a></button>
+              </div>
+              
+          
+            </div>
+              
+                
+          </div>
+      </div>
+    <!-- </div> -->
+  </div>
+
+ 
+  
+  

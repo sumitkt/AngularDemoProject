@@ -1,0 +1,43 @@
+<!-- <div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-1 " style="color: white;"></div>
+  <!- <div class="page__content shadow p-3 position-relative"> -->
+    <!-- <div class="page__content-data position-absolute text-center">
+      
+
+    </div>
+  
+</div> 
+</div>  -->
+<div style="text-align: right">
+  <button (click)='create()'>Add New</button>
+</div>
+<div class="overview">
+
+  
+  <div class="overview-head">
+    <div class="overview-cell center" style="padding: 10px;">POD name</div>
+    <div class="overview-cell center" style="padding: 10px;">POD Id </div>
+    <!-- <div class="overview-cell center" style="padding: 10px;">POD ID</div> -->
+    <div class="overview-cell center" style="padding: 10px;">Manager ID</div>
+    <div class="overview-cell center" style="padding: 10px;">Manager Name</div>
+    <div class="overview-cell center" style="padding: 10px;"></div>
+    <div class="overview-cell center" style="padding: 10px;"></div>
+  </div> 
+ 
+
+  <div class="overview-row" *ngFor = "let emp of pod"> 
+    <div class="overview-cell center">{{ emp.p_name }}</div>
+    <div class="overview-cell center">{{ emp.pod_id }}</div>
+    <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
+    <div class="overview-cell center">{{ emp.manager_id}}</div>
+    <div class="overview-cell center">{{ emp.manager.e_name}}</div>
+    <div class="overview-cell center">
+     <button style="margin-right: 10px;"> <a routerLink="details/{{ emp.pod_id }}">Details</a></button>
+     <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button>
+    </div>
+    
+
+  </div>
+    
+      
+</div>

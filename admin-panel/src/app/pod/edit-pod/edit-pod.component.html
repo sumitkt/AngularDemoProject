@@ -1,0 +1,32 @@
+<div class="wrapper" *ngIf='pod'>
+    <div class="property">
+      <label> POD NAME: </label>
+        <input type="text" [(ngModel)]="pod.p_name" />
+    </div>
+  
+    <div class="property">
+      <label> POD ID: </label>
+        <input type="text" [(ngModel)]="pod.pod_id" />
+    </div>
+  
+    <!-- <div class="property">
+      <label> POD ID: </label>
+        <input type="text" [(ngModel)]="employee.pod_id" />
+    </div> -->
+  
+    <div class="property">
+      <label> Manager ID: </label>
+        <input type="text" [(ngModel)]="pod.manager_id" />
+    </div>
+  
+    <!-- <div class="property">
+      <label> Employee Image: </label>
+        <input type="text" [(ngModel)]="employee.emp_image" />
+    </div> -->
+  
+  
+    <button (click) = 'updatepod()' *ngIf='!isNew'>Update</button>
+    <button (click) = 'createpod()' *ngIf='isNew'>Create</button>
+    <div *ngIf="saved" style="color:green;">Saved! <a routerLink= '/home'>Go to home</a></div>
+  
+  </div>
