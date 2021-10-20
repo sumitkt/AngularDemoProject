@@ -1,4 +1,4 @@
-// @import "../home/home.component.scss";
+ @import "../../home/home.component.scss";
 .card {
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 4px;
@@ -26,6 +26,7 @@ img {
 .info-cell{
     margin-bottom: 5px;
     font-size: large;
+    text-align: left;
 }
 
 .emp-details{
