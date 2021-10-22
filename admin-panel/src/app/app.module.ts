@@ -30,6 +30,8 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EmpprojectComponent } from './empproject/empproject.component';
 import { EmpskillsComponent } from './employee/empskills/empskills.component';
 import { ChartsModule } from 'ng2-charts';
+import { TimecardComponent } from './projects/timecard/timecard.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { ChartsModule } from 'ng2-charts';
     FilterPipePipe,
     ProjectsComponent,
     EmpprojectComponent,
-    EmpskillsComponent
+    EmpskillsComponent,
+    TimecardComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,7 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     ChartsModule
   ],
-  providers: [PodComponent],
+  providers: [PodComponent,DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

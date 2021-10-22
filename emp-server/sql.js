@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const {Sequelize,Op} = require('sequelize');
 // const employee = require('./employee');
 // const pod = require('./pod');
 
@@ -162,16 +162,59 @@ getprojectsBycustomerName = function(request,callback){
 }
 
 getEmpProject = function(request,callback){
+
+    Date.prototype.yyyymmdd = function() {
+        var mm = this.getMonth() + 1; // getMonth() is zero-based
+        var dd = this.getDate();
+      
+        return [this.getFullYear(),
+                (mm>9 ? '' : '0') + mm,
+                (dd>9 ? '' : '0') + dd
+               ].join('-');
+      };
+
+    current_date_IN_DATE_FORMAT=new Date();
+    current_date_IN_STRING_FORMAT=current_date_IN_DATE_FORMAT.yyyymmdd()
+
+    function startOfWeek(date) {
+        console.log('date.getDate =' + date.getDate());
+        console.log('date.getDay =' + date.getDay());
+        //console.log("date.getDate =" + date.getDate());
+        var diff =
+          date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1);
+        return new Date(date.setDate(diff));
+      }
+
+      start_date= startOfWeek(current_date_IN_DATE_FORMAT).yyyymmdd();
+      
+
+
+      
+
+
     models.empprojects.findAll({
         where:{
-            project_id:request.project_id
+            project_id:request.project_id,
+            date:{[Op.between]:[start_date,current_date_IN_STRING_FORMAT]}
+
         },
+       
         include: [{
             model: models.employee,
             required: true,
             as: "e"
-           }]
-    }).then( result => callback(result));
+           }],
+           attributes:['e_id','project_id',[sequelize.fn('sum', sequelize.col('work_hours')), 'thisweekstotalworkinghours']],
+        group:['empprojects.e_id','empprojects.project_id']
+    }).then( result => {
+        //console.log(result[1].work_hours);
+        
+        callback(result);
+    });
+}
+updateempProjects = function(request, callback) {
+    models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
+    then(result =>callback(result));
 }
 
 module.exports.init = init;
@@ -191,3 +234,4 @@ module.exports.updatepod = updatepod;
 module.exports.createpod = createpod;
 module.exports.getclients=getclients;
 module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
+module.exports.updateempProjects=updateempProjects;

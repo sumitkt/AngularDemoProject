@@ -1,0 +1,37 @@
+<div class="wrapper">
+    <div class="property">
+      <label>{{ mon }}: </label>
+      <input type="number" [(ngModel)]="Days.mon" />
+    </div>
+  
+    <div class="property">
+      <label> {{ Tuesday }}: </label>
+      <input type="number" [(ngModel)]="Days.tue"/>
+    </div>
+  
+    <div class="property">
+      <label>{{ Wednedday }}:</label>
+      <input type="number" [(ngModel)]="Days.wed" />
+    </div>
+  
+    <div class="property">
+      <label> {{ Thruds }}: </label>
+      <input type="number"  [(ngModel)]="Days.thurs" />
+    </div>
+  
+    <div class="property">
+      <label>{{ Friday }}:</label>
+      <input type="number" [(ngModel)]="Days.fri" />
+    </div>
+  
+    <div class="property">
+      <label>{{ Sat }}:</label>
+      <input type="number" [(ngModel)]="Days.sat" />
+    </div>
+  
+    <div class="property">
+      <label>{{ Sun }}:</label>
+      <input type="number" [(ngModel)]="Days.sun" />
+    </div>
+  </div>
+  <button (click)="onSubmit()">Submit</button>

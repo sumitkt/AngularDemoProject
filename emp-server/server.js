@@ -24,3 +24,4 @@ app.get("/", function(request, response){
 require("./pod.js")(app,sql);
 require("./employee.js")(app, sql);
 require("./client.js")(app,sql);
+require("./empprojects.js")(app,sql);

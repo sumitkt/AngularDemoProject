@@ -22,7 +22,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     work_hours: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
+    },
+    date: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      primaryKey: true
     }
   }, {
     sequelize,
@@ -36,6 +42,7 @@ module.exports = function(sequelize, DataTypes) {
         fields: [
           { name: "e_id" },
           { name: "project_id" },
+          { name: "date" },
         ]
       },
       {

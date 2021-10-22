@@ -11,10 +11,12 @@
   
     
             <div class="overview-head">
-              <div class="overview-cell center" style="padding: 10px;">Employee ID</div>
+              <div class="overview-cell center" style="padding: 10px;">Employee</div>
               <div class="overview-cell center" style="padding: 10px;">Employee Name</div>
               <div class="overview-cell center" style="padding: 10px;">POD-ID</div>
               <div class="overview-cell center" style="padding: 10px;">Working Hours</div>
+              <!-- <div class="overview-cell center" style="padding: 10px;">Date</div> -->
+              <!-- <div class="overview-cell center" style="padding: 10px;">Date</div> -->
               <div class="overview-cell center" style="padding: 10px;"></div>
               <!-- <div class="overview-cell center" style="padding: 10px;">STATUS</div>
               
@@ -23,15 +25,20 @@
            
           
             <div class="overview-row" *ngFor = "let ep of empproject"> 
+              
               <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e_id }}</div>
               <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e.e_name }}</div>
               <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
               <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e.pod_id}}</div>
-              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.work_hours}}</div>
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.thisweekstotalworkinghours}}</div>
+              <!-- <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.date}}</div> -->
               <!-- <div class="overview-cell center">{{ p.status}}</div> -->
+              <!-- <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.project_id }}</div> -->
               <div class="overview-cell center" style="padding: 10px;text-align:center;">
-               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id }}">Details</a></button>
-               
+                
+                
+               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}">Details</a></button>
+               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}/{{ep.project_id}}">Edit</a></button>
                <!-- <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button> -->
               </div>
               
