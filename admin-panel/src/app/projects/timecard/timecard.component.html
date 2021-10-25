@@ -1,0 +1,52 @@
+
+<div class="wrapper" *ngIf="Days">
+    <div class="property">
+      <label>{{ mon }}: </label>
+      <input type="number" [(ngModel)]="Days.mon" />
+      <!-- <span>Rem Hours: {{remhours.mon}}</span> -->
+      
+    </div>
+  
+    <div class="property">
+      <label> {{ Tuesday }}: </label>
+      <input type="number" [(ngModel)]="Days.tue"/>
+      <!-- <span>Rem Hours: {{remhours.tue}}</span> -->
+      
+    </div>
+  
+    <div class="property">
+      <label>{{ Wednedday }}:</label>
+      <input type="number" [(ngModel)]="Days.wed" />
+      <!-- <span>Rem Hours: {{remhours.mon}}</span> -->
+      
+    </div>
+  
+    <div class="property">
+      <label> {{ Thruds }}: </label>
+      <input type="number"  [(ngModel)]="Days.thurs" />
+      <!-- <span>Rem Hours:{{remhours.mon}}</span> -->
+      
+    </div>
+  
+    <div class="property">
+      <label>{{ Friday }}:</label>
+      <input type="number" [(ngModel)]="Days.fri" />
+      <!-- <span>Rem Hours: {{remhours.mon}}</span> -->
+      
+    </div>
+  
+    <div class="property">
+      <label>{{ Sat }}:</label>
+      <input type="number" [(ngModel)]="Days.sat" />
+      <!-- <span>Rem Hours:</span> -->
+     
+    </div>
+  
+    <div class="property">
+      <label>{{ Sun }}:</label>
+      <input type="number" [(ngModel)]="Days.sun" />
+      <!-- <span>Rem Hours:</span> -->
+      
+    </div>
+  </div>
+  <button (click)="onSubmit()">Submit</button>

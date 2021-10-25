@@ -12,6 +12,7 @@ import { EditPodComponent } from './pod/edit-pod/edit-pod.component';
 import { PodComponent } from './pod/pod.component';
 import { PodviewComponent } from './pod/podview/podview.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { TimecardComponent } from './projects/timecard/timecard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,10 +24,13 @@ const routes: Routes = [
   {path:'emp/employeelist',component:EmployeeListComponent },
   {path:'emp/employeelist/:e_id',component:EmployeeDetailComponent },
   {path:'emp/employeelist/edit/:e_id',component:EditEmployeeComponent },
+  {path:'emp/employeelist/:e_id/:project_id',component:TimecardComponent},
   {path:'home/editpod/:pod_id',component:EditPodComponent},
   {path:'home/details/:pod_id',component:PodviewComponent},
   {path:'projectof/:customer_name',component:ProjectsComponent},
   {path:'projectsof/:project_id',component:EmpprojectComponent}
+  
+  
 
 ];
 
