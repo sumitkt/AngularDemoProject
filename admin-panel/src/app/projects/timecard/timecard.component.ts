@@ -13,7 +13,7 @@ import { RemHours } from './remhours';
 })
 export class TimecardComponent implements OnInit {
 
-  remhours:RemHours;
+  remhours:RemHours=new RemHours;
 
   Days: Days = new Days();
   model: any = {};
@@ -32,6 +32,8 @@ export class TimecardComponent implements OnInit {
   myObj = [];
   e_id='';
   project_id='';
+  checker=false;
+  
   //getdate: any;
 
   constructor(public datepipe: DatePipe, private myservice: TimecardService,private route:ActivatedRoute) {}
@@ -43,7 +45,19 @@ export class TimecardComponent implements OnInit {
       this.project_id = params.get('project_id');
   });
   this.myservice.findRemHours(this.e_id).subscribe(result =>{
-    this.remhours=result;
+    
+    this.remhours.mon=result[0].total_hours;
+    this.remhours.tue=result[1].total_hours;
+    this.remhours.wed=result[2].total_hours;
+    this.remhours.thurs=result[3].total_hours;
+    this.remhours.fri=result[4].total_hours;
+    this.remhours.sat=result[5].total_hours;
+    this.remhours.sun=result[6].total_hours;
+    //console.log(this.remhours.mon);
+    // console.log(result[0].total_hours);
+    // this.remhours.mon=result[0].total_hours;
+    // console.log(this.remhours.mon);
+    
 
   });
   this.myservice.getCurrSchedule(this.e_id,this.project_id,this.mon.split(',')[1],this.Sun.split(',')[1]).subscribe(result =>{
@@ -126,6 +140,10 @@ export class TimecardComponent implements OnInit {
     
 
     this.myservice.onsubmit(this.myObj).subscribe(result=>{
+      
+      if(result.message){
+        this.checker=true;
+      }
       console.log(result);
       // for(let i=0;i<7;i++){
       //   console.log(result[i]);

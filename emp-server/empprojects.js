@@ -1,16 +1,25 @@
 module.exports=function(app,sql){
     app.post("/timecard", function(request,response){
-        console.log(request.body)
+        //console.log(request.body)
         sql.updateempProjects(request.body,function(result){
-            console.log(result);
+            //console.log(result);
             response.send(result);
+        });
     });
-});
 
     app.get("/remaininghours/:e_id",function(request,response){
 
         console.log(request.params);
-        //sql.findRemHours(request.params.e_id)
+        sql.findRemHours(request.params,function(result){
+            response.send(result)
+        })
+    });
+
+    app.get("/podByProject/:p_id",function(request,response){
+
+        sql.podByProject(request.params,function(result){
+            response.send(result)
+        })
     });
 
     app.get("/currentschedule/:e_id/:project_id/:start_date/:end_date",function(request,response){

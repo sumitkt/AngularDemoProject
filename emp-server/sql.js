@@ -115,6 +115,10 @@ getpodById = function(options ,callback){
         then(emp => callback(emp));
 };
 
+podByProject = function(options ,callback){
+    models.projects.findOne({ where: {project_id: options.p_id } }).
+        then(emp => callback(emp));
+};
 
 editPod = function(options ,callback){
     console.log("***********");
@@ -214,6 +218,11 @@ getEmpProject = function(request,callback){
             model: models.employee,
             required: true,
             as: "e"
+           },
+           {
+            model: models.projects,
+            required: true,
+            as: "project"
            }],
            attributes:['e_id','project_id',[sequelize.fn('sum', sequelize.col('work_hours')), 'thisweekstotalworkinghours']],
         group:['empprojects.e_id','empprojects.project_id']
@@ -227,9 +236,13 @@ updateempProjects = function(request, callback) {
     //console.log("*******************");
     //console.log(request[0].work_hours);
     //console.log("*******************");
-    let flag=false;
+    
+    flag=false;
+    myArray=[]
     for(let i=0;i<7;i++){
-        models.empprojects.findAll({
+        
+       
+       models.empprojects.findAll({
             where:{
                 e_id:request[i].e_id,
                 date:request[i].date
@@ -239,23 +252,58 @@ updateempProjects = function(request, callback) {
             raw:true
 
         }).then(result => {
-            console.log("i="+i);
-            if(result[0].total_hours >8){
+            //console.log("i="+i);
+            console.log(result[0]);
+            if((result[0].total_hours + request[i].work_hours) >8){
                 flag=true;
-                //break;
+                return flag;
             } 
-            console.log("*******************");
-        })
-   
+            return flag
+        }).then(flag =>{
+            console.log(flag)
+            myArray.push(flag)
+            return myArray
+            
+
+        }).then(result => {
+            console.log(result.length)
+            if (result.length == 7){
+            // let checker = result =>  result.every(v => v === false);
+            // console.log(checker)
+            if( result.every(v => v === false)){
+                models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
+                then(result =>callback(result));
+            }
+            else{
+                obj={message:"exceeded limit"};
+                callback(obj);
+            }
+
+            }
+        });
+    // console.log("*****");
+    // console.log(myArray.length);
+    // console.log("*****");
+    // if(myArray.length == 7){
+    //         let checker = myArray => myArray.every(v => v=== false);
+    //         console.log(checker)
+    //         if(checker){
+    //             models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
+    //             then(result =>callback(result));
+    //         }
+    //         else{
+    //             message="exceeded limit";
+    //             callback(message);
+    //         }
+    //     }
+        
     }// end of for loop
-    if(flag === false){
-        models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
-        then(result =>callback(result));
-    }
-    else{
-        let message="work_hours exceeded";
-        callback(message);
-    }
+    // if(flag == false){
+       
+    // }
+    // else{
+       
+    // }
     
 }
 
@@ -269,6 +317,19 @@ findcurrentschedule= function(request,callback){
         }
     }).then(result => callback(result));
     
+}
+
+findRemHours= function(request,callback){
+    models.empprojects.findAll({
+        where:{
+            e_id:request.e_id,
+            date:{[Op.in]:['2021-10-25','2021-10-26','2021-10-27','2021-10-28','2021-10-29','2021-10-30','2021-10-31']}
+
+        },
+        attributes:['e_id','date',[sequelize.fn('sum', sequelize.col('work_hours')), 'total_hours']],
+        group:['e_id','date'],
+        raw:true
+    }).then( result => callback(result));
 }
 
 module.exports.init = init;
@@ -291,3 +352,5 @@ module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
 module.exports.addEmp=addEmp;
 module.exports.updateempProjects=updateempProjects;
 module.exports.findcurrentschedule=findcurrentschedule;
+module.exports.findRemHours=findRemHours;
+module.exports.podByProject=podByProject;
