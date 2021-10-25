@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Days } from './days';
+
 import { TimecardService } from './timecard.service';
 import { ActivatedRoute } from '@angular/router';
+import { RemHours } from './remhours';
 
 @Component({
   selector: 'app-timecard',
@@ -10,6 +12,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./timecard.component.scss']
 })
 export class TimecardComponent implements OnInit {
+
+  remhours:RemHours;
 
   Days: Days = new Days();
   model: any = {};
@@ -38,9 +42,23 @@ export class TimecardComponent implements OnInit {
       this.e_id = params.get('e_id');
       this.project_id = params.get('project_id');
   });
+  this.myservice.findRemHours(this.e_id).subscribe(result =>{
+    this.remhours=result;
+
+  });
+  this.myservice.getCurrSchedule(this.e_id,this.project_id,this.mon.split(',')[1],this.Sun.split(',')[1]).subscribe(result =>{
+    this.Days.mon=result[0].work_hours;
+    this.Days.tue=result[1].work_hours;
+    this.Days.wed=result[2].work_hours;
+    this.Days.thurs=result[3].work_hours;
+    this.Days.fri=result[4].work_hours;
+    this.Days.sat=result[5].work_hours;
+    this.Days.sun=result[6].work_hours;
+  });
+
   }
   searchdate() {
-    debugger;
+    //debugger;
     console.log(this.model.startdate);
     console.log('XXXXXXXXXXXXXXX');
     let getdate = this.datepipe.transform(this.model.startdate, 'yyyy,M,d');
@@ -109,7 +127,20 @@ export class TimecardComponent implements OnInit {
 
     this.myservice.onsubmit(this.myObj).subscribe(result=>{
       console.log(result);
-      this.myObj=result;
+      // for(let i=0;i<7;i++){
+      //   console.log(result[i]);
+
+      // }
+      // //console.log(result[0].work_hours);
+      // this.Days.mon=result[0].work_hours;
+      // this.Days.tue=result[1].work_hours;
+      // this.Days.wed=result[2].work_hours;
+      // this.Days.thurs=result[3].work_hours;
+      // this.Days.fri=result[4].work_hours;
+      // this.Days.sat=result[5].work_hours;
+      // this.Days.sun=result[6].work_hours;
+      // console.log(this.Days.mon);
+
     });
   }
 }

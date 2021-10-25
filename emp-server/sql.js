@@ -213,8 +213,51 @@ getEmpProject = function(request,callback){
     });
 }
 updateempProjects = function(request, callback) {
-    models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
-    then(result =>callback(result));
+    //console.log("*******************");
+    //console.log(request[0].work_hours);
+    //console.log("*******************");
+    let flag=false;
+    for(let i=0;i<7;i++){
+        models.empprojects.findAll({
+            where:{
+                e_id:request[i].e_id,
+                date:request[i].date
+            },
+            attributes:['e_id','date',[sequelize.fn('sum', sequelize.col('work_hours')), 'total_hours']],
+            group:['e_id','date'],
+            raw:true
+
+        }).then(result => {
+            console.log("i="+i);
+            if(result[0].total_hours >8){
+                flag=true;
+                //break;
+            } 
+            console.log("*******************");
+        })
+   
+    }// end of for loop
+    if(flag === false){
+        models.empprojects.bulkCreate(request, { updateOnDuplicate: ["work_hours"] }).
+        then(result =>callback(result));
+    }
+    else{
+        let message="work_hours exceeded";
+        callback(message);
+    }
+    
+}
+
+
+findcurrentschedule= function(request,callback){
+    models.empprojects.findAll({
+        where:{
+            e_id:request.e_id,
+            project_id:request.project_id,
+            date:{[Op.between]:[request.start_date,request.end_date]}
+        }
+    }).then(result => callback(result));
+    
 }
 
 module.exports.init = init;
@@ -235,3 +278,4 @@ module.exports.createpod = createpod;
 module.exports.getclients=getclients;
 module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
 module.exports.updateempProjects=updateempProjects;
+module.exports.findcurrentschedule=findcurrentschedule;

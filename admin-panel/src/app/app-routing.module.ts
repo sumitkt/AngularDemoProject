@@ -30,6 +30,7 @@ const routes: Routes = [
   {path:'projectof/:customer_name',component:ProjectsComponent},
   {path:'projectsof/:project_id',component:EmpprojectComponent}
   
+  
 
 ];
 

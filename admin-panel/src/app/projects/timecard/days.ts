@@ -8,3 +8,10 @@ export class Days {
     sun: any;
   }
   
+
+// export class MyClass{
+//     date: string; 
+//     work_hours: number;
+//      e_id: string; 
+//      project_id:string;
+// }
