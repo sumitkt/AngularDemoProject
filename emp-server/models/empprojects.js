@@ -22,7 +22,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     work_hours: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     sequelize,
