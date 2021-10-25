@@ -24,12 +24,12 @@ import { FormsModule } from '@angular/forms';
 import { PodviewComponent } from './pod/podview/podview.component';
 import { EditPodComponent } from './pod/edit-pod/edit-pod.component';
 import { ClientsComponent } from './clients/clients.component';
-import { UniquePipe } from './content/projects/pipeUnique.pipe';
-import { FilterPipePipe } from './content/projects/filterPipe.pipe';
 import { ProjectsComponent } from './projects/projects.component';
 import { EmpprojectComponent } from './empproject/empproject.component';
 import { EmpskillsComponent } from './employee/empskills/empskills.component';
 import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmpFilterPipe } from './empproject/EmpFilter.pipe';
 
 @NgModule({
   declarations: [
@@ -46,11 +46,10 @@ import { ChartsModule } from 'ng2-charts';
     PodviewComponent,
     EditPodComponent,
     ClientsComponent,
-    UniquePipe,
-    FilterPipePipe,
     ProjectsComponent,
     EmpprojectComponent,
-    EmpskillsComponent
+    EmpskillsComponent,
+    EmpFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +64,8 @@ import { ChartsModule } from 'ng2-charts';
     MatListModule,
     HttpClientModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    NgbModule,
   ],
   providers: [PodComponent],
   bootstrap: [AppComponent],

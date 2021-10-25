@@ -20,6 +20,12 @@ module.exports = function(app,sql) {
         sql.getEmpProject({project_id:a},function(result){
             response.send(result);
         })
-    })
+    });
+
+    app.post("/addemp", function(request,response){
+        sql.addEmp(request.body, function(result){
+            response.send(result);
+        });
+    });
 
 }

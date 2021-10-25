@@ -6,7 +6,8 @@ module.exports = function(app,sql) {
             response.send(result);
         })
     });
- 
+
+    
     app.get("/pod/:p_id", function(request,response){
         sql.getpodById({p_id: request.params.p_id}, function(emp){
             response.send(emp);

@@ -14,4 +14,8 @@ export class EmpprojectService {
   getEmpProjects(project_id:string):Observable<EmpProject[]>{
     return this.http.get<EmpProject[]>(environment.apiUrl+'/empproject/'+project_id);
   }
+
+  addEmp(empadd: EmpProject): Observable<EmpProject> {
+    return this.http.post<EmpProject>(environment.apiUrl + '/addemp', empadd);
+  }
 }

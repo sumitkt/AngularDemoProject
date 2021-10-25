@@ -114,6 +114,8 @@ getpodById = function(options ,callback){
     models.pod.findOne({ where: {pod_id: options.pod_id } }).
         then(emp => callback(emp));
 };
+
+
 editPod = function(options ,callback){
     console.log("***********");
     console.log(options);
@@ -147,6 +149,14 @@ createpod = function(request,callback) {
     }).then(emp => callback(emp));
 }
 
+addEmp = function(request,callback) {
+    models.empprojects.create({
+        e_id: request.e_id,
+        project_id: request.project_id,
+        work_hours: request.work_hours,
+        
+    }).then(emp => callback(emp));
+}
 
 getclients = function(callback){
     models.customer.findAll().then(client => callback(client));
@@ -191,3 +201,4 @@ module.exports.updatepod = updatepod;
 module.exports.createpod = createpod;
 module.exports.getclients=getclients;
 module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
+module.exports.addEmp=addEmp;
