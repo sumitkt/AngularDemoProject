@@ -7,6 +7,7 @@ import { EmployeeService } from '../employee/employee.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
+
 @Component({
   selector: 'app-empproject',
   templateUrl: './empproject.component.html',
@@ -18,6 +19,11 @@ export class EmpprojectComponent implements OnInit {
   empproject:EmpProject[];
   empadd: EmpProject=null;
   closeResult = '';
+  curr = new Date; 
+  week = [];
+  workHours=[0,0,0,0,0,0,0];
+  currDay:number;
+  dayIndex=[];
 
   constructor(
     private empprojectservice:EmpprojectService,
@@ -47,6 +53,14 @@ export class EmpprojectComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currDay=this.curr.getDay();
+    for (let i = 1; i <= this.currDay; i++) {
+      let first = this.curr.getDate() - this.currDay + i ;
+      let day = new Date(this.curr.setDate(first)).toISOString().slice(0, 10);
+      this.week.push(day);
+      this.dayIndex.push(i-1);
+    }
+    
     this.empadd=new EmpProject();
     this.getEmployees();
     this.route.params.subscribe(params =>{
@@ -56,7 +70,6 @@ export class EmpprojectComponent implements OnInit {
           this.empproject=empproject;
         });
       })
-    
   }
 
   getEmployees(): void {
@@ -66,11 +79,18 @@ export class EmpprojectComponent implements OnInit {
   }
 
   addEmp(): void {
-    console.log(this.empadd);
-    this.empprojectservice.addEmp(this.empadd).subscribe(
-      result => {
-        this.empadd = result;
-      });
+    for(let i=0; i<this.currDay; i++){
+            this.empadd.work_hours=this.workHours[i];
+            this.empadd.date=this.week[i];
+            this.empprojectservice.addEmp(this.empadd).subscribe(
+              result => {
+                this.empadd = result;
+              });
+        }
+      
+    }
+    refresh(): void {
+      window.location.reload();
   }
 }
 

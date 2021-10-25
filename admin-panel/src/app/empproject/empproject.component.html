@@ -14,20 +14,21 @@
             </button>
             
             <div ngbDropdownMenu aria-labelledby="empList">
-                <button (click)="open(addEmpPop)" ngbDropdownItem
-                 *ngFor="let emp of employees | filter: empproject[0].e.pod_id"
-                 (click)="selectedEmp = emp">
-                    {{emp.e_name}}
-                </button>
-            </div>
+              <button (click)="empadd.e_id=emp.e_id;empadd.project_id=empproject[0].project_id;addEmp();refresh()" ngbDropdownItem
+               *ngFor="let emp of employees | filter: empproject[0].e.pod_id"
+               >
+                  {{emp.e_name}}
+              </button>
+            </div> 
+
           </div>
 
-          
+         
           <ng-template #addEmpPop let-modal>
             <div class="modal-header">
                 <h4 class="modal-title" 
                     id="modal-basic-title">
-                    Add a New Employee
+                    Edit Working Hours
                 </h4>
                 <button type="button" class="close"
                         aria-label="Close" (click)=
@@ -45,31 +46,30 @@
                             Employee ID
                         </label>
                         <input
-                            
-                            id="empadd.e_id" 
                             class="form-control"  
-                            name="empadd.e_id" 
                             value={{selectedEmp.e_id}}>
                         
-                          <label>
-                              Project ID
-                          </label>
-                          <input
-                              id="empadd.project_id" 
-                              class="form-control"  
-                              name="empadd.project_id" 
-                              value={{empproject[0].project_id}}
-                              >
-                        
-                                            
-                                            
                         <label>
-                            Working Hours 
+                            Project ID
                         </label>
-                        <input id="empadd.work_hours" 
-                                class="form-control"  
-                                name="empadd.work_hours" [(ngModel)]="empadd.work_hours">
-                      </div>
+                        <input
+                            class="form-control"  
+                            value={{empproject[0].project_id}}
+                            >
+                                            
+                        <h5 style="text-align: center; margin-top: 1rem;">
+                            Working Hours 
+                        </h5>
+                        
+                        <div *ngFor="let n of dayIndex">
+                          <label>{{week[n]}}</label>  
+                          <input 
+                              class="form-control"  
+                              name="d1"
+                              [(ngModel)]="workHours[n]">
+                        </div>
+                                              
+                    </div>
           
                 </form>
             </div>
@@ -113,6 +113,7 @@
                 
                <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}">Details</a></button>
                <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}/{{ep.project_id}}">Edit</a></button>
+               <button (click)="open(addEmpPop)" (click)="selectedEmp = ep"> Edit </button>
                <!-- <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button> -->
               </div>
               

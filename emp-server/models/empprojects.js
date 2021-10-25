@@ -24,14 +24,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
-<<<<<<< HEAD
-=======
     },
     date: {
       type: DataTypes.STRING(50),
       allowNull: false,
       primaryKey: true
->>>>>>> 150e91de8d8e522d0f46aa989cd4ac111e3656ff
     }
   }, {
     sequelize,

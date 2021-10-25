@@ -154,6 +154,7 @@ addEmp = function(request,callback) {
         e_id: request.e_id,
         project_id: request.project_id,
         work_hours: request.work_hours,
+        date: request.date,
         
     }).then(emp => callback(emp));
 }
@@ -287,9 +288,6 @@ module.exports.updatepod = updatepod;
 module.exports.createpod = createpod;
 module.exports.getclients=getclients;
 module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
-<<<<<<< HEAD
 module.exports.addEmp=addEmp;
-=======
 module.exports.updateempProjects=updateempProjects;
 module.exports.findcurrentschedule=findcurrentschedule;
->>>>>>> 150e91de8d8e522d0f46aa989cd4ac111e3656ff

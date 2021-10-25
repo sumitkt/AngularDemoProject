@@ -28,13 +28,10 @@ import { ProjectsComponent } from './projects/projects.component';
 import { EmpprojectComponent } from './empproject/empproject.component';
 import { EmpskillsComponent } from './employee/empskills/empskills.component';
 import { ChartsModule } from 'ng2-charts';
-<<<<<<< HEAD
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmpFilterPipe } from './empproject/EmpFilter.pipe';
-=======
 import { TimecardComponent } from './projects/timecard/timecard.component';
 import { DatePipe } from '@angular/common';
->>>>>>> 150e91de8d8e522d0f46aa989cd4ac111e3656ff
 
 @NgModule({
   declarations: [
@@ -54,11 +51,8 @@ import { DatePipe } from '@angular/common';
     ProjectsComponent,
     EmpprojectComponent,
     EmpskillsComponent,
-<<<<<<< HEAD
     EmpFilterPipe,
-=======
     TimecardComponent
->>>>>>> 150e91de8d8e522d0f46aa989cd4ac111e3656ff
   ],
   imports: [
     BrowserModule,
