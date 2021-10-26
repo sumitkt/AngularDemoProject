@@ -14,10 +14,10 @@ module.exports = function(app,sql) {
         });
     });
 
-    app.get("/empproject/:project_id",function(request, response){
+    app.get("/empproject/:project_id/:status",function(request, response){
         var a = parseInt(request.params.project_id);
 
-        sql.getEmpProject({project_id:a},function(result){
+        sql.getEmpProject({project_id:a,status:request.params.status},function(result){
             response.send(result);
         })
     })

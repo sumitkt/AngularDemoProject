@@ -28,8 +28,8 @@ const routes: Routes = [
   {path:'home/editpod/:pod_id',component:EditPodComponent},
   {path:'home/details/:pod_id',component:PodviewComponent},
   {path:'projectof/:customer_name',component:ProjectsComponent},
-  {path:'projectsof/:project_id',component:EmpprojectComponent}
-  
+  // {path:'projectsof/:project_id',component:EmpprojectComponent},
+  {path:'projectsof/:project_id/:status',component:EmpprojectComponent}
   
 
 ];

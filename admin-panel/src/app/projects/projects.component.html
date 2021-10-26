@@ -28,10 +28,23 @@
               <div class="overview-cell center">{{ p.start_date}}</div>
               <div class="overview-cell center">{{ p.status}}</div>
               <div class="overview-cell center">
-               <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}">Details</a></button>
+                  <div *ngIf="p.status === 'Completed'; then thenBlock else elseBlock"></div>
+                  <ng-template #thenBlock>
+                    <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}/{{p.status}}">Details</a></button>
+                  </ng-template>
+
+                  <ng-template #elseBlock>
+                    <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}/{{p.status}}">Det</a></button>
+                  </ng-template>
+
+               
                <!-- <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button> -->
               </div>
-              
+              <!-- <div class="overview-cell center">
+                <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}">Details</a></button>
+               
+               </div> -->
+               
           
             </div>
               

@@ -11,7 +11,7 @@ export class EmpprojectService {
 
   constructor(private http:HttpClient) { }
 
-  getEmpProjects(project_id:string):Observable<EmpProject[]>{
-    return this.http.get<EmpProject[]>(environment.apiUrl+'/empproject/'+project_id);
+  getEmpProjects(project_id:string, status:string):Observable<EmpProject[]>{
+    return this.http.get<EmpProject[]>(environment.apiUrl+'/empproject/'+project_id +'/'+status);
   }
 }
