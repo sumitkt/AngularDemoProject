@@ -26,7 +26,15 @@
               <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
               <div class="overview-cell center">{{ p.pod_id}}</div>
               <div class="overview-cell center">{{ p.start_date}}</div>
-              <div class="overview-cell center">{{ p.status}}</div>
+              <div *ngIf="p.status === 'Completed'; then CompletedBlock else OngoingBlock"></div>
+              <ng-template #CompletedBlock>
+                <div class="overview-cell center "><span class="cstatus">{{ p.status}}</span></div>
+              </ng-template>
+
+              <ng-template #OngoingBlock>
+                <div class="overview-cell center "><span class="ostatus">{{ p.status}}</span></div>
+              </ng-template>
+              
               <div class="overview-cell center">
                   <div *ngIf="p.status === 'Completed'; then thenBlock else elseBlock"></div>
                   <ng-template #thenBlock>
@@ -34,7 +42,7 @@
                   </ng-template>
 
                   <ng-template #elseBlock>
-                    <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}/{{p.status}}">Det</a></button>
+                    <button style="margin-right: 10px;"> <a routerLink="/projectsof/{{p.project_id}}/{{p.status}}">Details</a></button>
                   </ng-template>
 
                
