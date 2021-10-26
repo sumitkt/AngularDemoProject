@@ -39,6 +39,7 @@ export class TimecardComponent implements OnInit {
   constructor(public datepipe: DatePipe, private myservice: TimecardService,private route:ActivatedRoute) {}
   ngOnInit() {
     this.model.startdate = new Date();
+    this.checker = false;
     this.searchdate();
     this.route.paramMap.subscribe( params => {
       this.e_id = params.get('e_id');
@@ -129,6 +130,7 @@ export class TimecardComponent implements OnInit {
   }
 
   onSubmit() {
+    //this.checker=false;
     this.myObj=[]
     this.myObj.push({"date":this.mon.split(',')[1],"work_hours":this.Days.mon,"e_id":this.e_id,"project_id":this.project_id});
     this.myObj.push({"date":this.Tuesday.split(',')[1],"work_hours":this.Days['tue'],"e_id":this.e_id,"project_id":this.project_id});
@@ -142,22 +144,10 @@ export class TimecardComponent implements OnInit {
     this.myservice.onsubmit(this.myObj).subscribe(result=>{
       
       if(result.message){
-        this.checker=true;
+        // this.checker=true;
+        alert("Hours Exceeded");
       }
       console.log(result);
-      // for(let i=0;i<7;i++){
-      //   console.log(result[i]);
-
-      // }
-      // //console.log(result[0].work_hours);
-      // this.Days.mon=result[0].work_hours;
-      // this.Days.tue=result[1].work_hours;
-      // this.Days.wed=result[2].work_hours;
-      // this.Days.thurs=result[3].work_hours;
-      // this.Days.fri=result[4].work_hours;
-      // this.Days.sat=result[5].work_hours;
-      // this.Days.sun=result[6].work_hours;
-      // console.log(this.Days.mon);
 
     });
   }

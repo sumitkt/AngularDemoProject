@@ -233,8 +233,8 @@ updateempProjects = function(request, callback) {
 
         }).then(result => {
             //console.log("i="+i);
-            console.log(result[0]);
-            if(result[0].total_hours >8){
+            console.log(result);
+            if((result[0].total_hours + request[i].work_hours) >8){
                 flag=true;
                 return flag;
             } 
