@@ -65,11 +65,105 @@
   </div> -->
   <!-- <h3 style="text-align:center;">PROJECT ID: {{empproject[0].project_id}}</h3> -->
   <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-1 " style="color: white;">Project ID: {{empproject[0].project_id}}</div>
+    <div class="d-flex page__box p-3 mt-1 " style="color: white;">Project ID: {{Project_ID}}</div>
     <!-- <div class="page__content shadow p-3 position-relative"> -->
       <div class="page__content-data position-absolute text-center">
         <div class="overview">
-  
+          <div ngbDropdown class="d-inline-block">
+            <button style="margin:1rem" class="btn btn-outline-primary" id="empList" ngbDropdownToggle>
+                Add New
+            </button>
+            
+            <div ngbDropdownMenu aria-labelledby="empList">
+              <button (click)="empadd.e_id=emp.e_id;
+                              empadd.project_id=Project_ID;
+                              addEmp();refresh()" ngbDropdownItem
+                              *ngFor="let emp of employees | filter: PROJECT.pod_id">
+                  {{emp.e_name}}
+              </button>
+            </div> 
+
+          </div>
+
+         
+          <ng-template #addEmpPop let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" 
+                    id="modal-basic-title">
+                    Edit Working Hours
+                </h4>
+                <button type="button" class="close"
+                        aria-label="Close" (click)=
+                        "modal.dismiss('Cross click')">
+          
+                    <span aria-hidden="true">
+                        ×
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label >
+                            Employee ID
+                        </label>
+                        <input
+                            class="form-control"  
+                            value={{selectedEmp.e_id}}>
+                        
+                        <label>
+                            Project ID
+                        </label>
+                        <input
+                            class="form-control"  
+                            value={{Project_ID}}
+                            >
+                                            
+                        <h5 style="text-align: center; margin-top: 1rem;">
+                            Working Hours 
+                        </h5>
+                        
+                        <label>{{ mon }}: </label><span style="float: right;">Rem Hours: {{8-remhours.mon}}</span>
+                        <input type="number" class="form-control" name="mon" [(ngModel)]="Days.mon" />
+                        
+                        <label>{{ Tuesday }}: </label><span style="float: right;">Rem Hours: {{8-remhours.tue}}</span>
+                        <input type="number" class="form-control" name="tue" [(ngModel)]="Days.tue" />
+
+                        <label>{{ Wednedday }}: </label><span style="float: right;">Rem Hours: {{8-remhours.wed}}</span>
+                        <input type="number" class="form-control" name="wed" [(ngModel)]="Days.wed" />
+
+                        <label>{{ Thruds }}: </label><span style="float: right;">Rem Hours: {{8-remhours.thurs}}</span>
+                        <input type="number" class="form-control" name="thurs" [(ngModel)]="Days.thurs" />
+
+                        <label>{{ Friday }}: </label><span style="float: right;">Rem Hours: {{8-remhours.fri}}</span>
+                        <input type="number" class="form-control" name="fri" [(ngModel)]="Days.fri" />
+
+                        <label>{{ Sat }}: </label><span style="float: right;">Rem Hours: {{8-remhours.sat}}</span>
+                        <input type="number" class="form-control" name="sat" [(ngModel)]="Days.sat" />
+
+                        <label>{{ Sun }}: </label><span style="float: right;">Rem Hours: {{8-remhours.sun}}</span>
+                        <input type="number" class="form-control" name="sun" [(ngModel)]="Days.sun" />
+                        
+
+                        <!-- <div *ngFor="let n of dayIndex">
+                          <label>{{week[n]}}</label>  
+                          <input 
+                              class="form-control"  
+                              name="d1"
+                              [(ngModel)]="workHours[n]">
+                        </div> -->
+                                              
+                    </div>
+          
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="onSubmit()" class="btn btn-outline-dark" >Submit</button>
+                <div *ngIf="checker" style="color: red">
+                  hours exceeded. <button class="btn btn-outline-primary" (click)="refresh()">Fill Again</button>
+                </div>
+            </div>
+          </ng-template>
     
             <div class="overview-head">
               <div class="overview-cell center" style="padding: 10px;">Employee</div>
@@ -99,7 +193,13 @@
                 
                 
                <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}">Details</a></button>
-               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}/{{ep.project_id}}">Edit</a></button>
+               <button (click)="e_id=ep.e_id ;
+                                project_id=ep.project_id;
+                                onEmpClick();
+                                open(addEmpPop);
+                                selectedEmp = ep">
+                       Edit
+                       </button>
                <!-- <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button> -->
               </div>
               
@@ -108,7 +208,7 @@
               
                 
           </div>
-          
+        
           
       </div>
     <!-- </div> -->

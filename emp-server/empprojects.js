@@ -4,13 +4,20 @@ module.exports=function(app,sql){
         sql.updateempProjects(request.body,function(result){
             //console.log(result);
             response.send(result);
+        });
     });
-});
 
     app.get("/remaininghours/:e_id",function(request,response){
 
         console.log(request.params);
         sql.findRemHours(request.params,function(result){
+            response.send(result)
+        })
+    });
+
+    app.get("/podByProject/:p_id",function(request,response){
+
+        sql.podByProject(request.params,function(result){
             response.send(result)
         })
     });

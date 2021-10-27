@@ -115,6 +115,12 @@ getpodById = function(options ,callback){
     models.pod.findOne({ where: {pod_id: options.pod_id } }).
         then(emp => callback(emp));
 };
+
+podByProject = function(options ,callback){
+    models.projects.findOne({ where: {project_id: options.p_id } }).
+        then(emp => callback(emp));
+};
+
 editPod = function(options ,callback){
     console.log("***********");
     console.log(options);
@@ -148,6 +154,15 @@ createpod = function(request,callback) {
     }).then(emp => callback(emp));
 }
 
+addEmp = function(request,callback) {
+    models.empprojects.create({
+        e_id: request.e_id,
+        project_id: request.project_id,
+        work_hours: request.work_hours,
+        date: request.date,
+        
+    }).then(emp => callback(emp));
+}
 
 getclients = function(callback){
     models.customer.findAll().then(client => callback(client));
@@ -207,6 +222,11 @@ getEmpProject = function(request,callback){
             model: models.employee,
             required: true,
             as: "e"
+           },
+           {
+            model: models.projects,
+            required: true,
+            as: "project"
            }],
            attributes:['e_id','project_id',[sequelize.fn('sum', sequelize.col('work_hours')), 'thisweekstotalworkinghours']],
         group:['empprojects.e_id','empprojects.project_id']
@@ -255,6 +275,7 @@ updateempProjects = function(request, callback) {
 
         }).then(result => {
             //console.log("i="+i);
+            console.log(result[0]);
             console.log(result);
             if((result[0].total_hours + request[i].work_hours) >8){
                 flag=true;
@@ -351,6 +372,8 @@ module.exports.updatepod = updatepod;
 module.exports.createpod = createpod;
 module.exports.getclients=getclients;
 module.exports.getprojectsBycustomerName=getprojectsBycustomerName;
+module.exports.addEmp=addEmp;
 module.exports.updateempProjects=updateempProjects;
 module.exports.findcurrentschedule=findcurrentschedule;
 module.exports.findRemHours=findRemHours;
+module.exports.podByProject=podByProject;
