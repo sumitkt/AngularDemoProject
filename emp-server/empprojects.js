@@ -22,6 +22,18 @@ module.exports=function(app,sql){
         })
     });
 
+    app.get("/employeeSchedule/:e_id",function(request,response){
+
+
+
+        sql.findEmployeeSchedule(request.params, function(result){
+
+            response.send(result);
+
+        })
+
+    });
+
     app.get("/currentschedule/:e_id/:project_id/:start_date/:end_date",function(request,response){
 
         console.log(request);

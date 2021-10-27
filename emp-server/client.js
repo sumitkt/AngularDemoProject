@@ -28,4 +28,10 @@ module.exports = function(app,sql) {
         });
     });
 
+    app.post("/addproject", function(request,response){
+        sql.addProject(request.body, function(result){
+            response.send(result);
+        });
+    });
+
 }

@@ -36,4 +36,9 @@ constructor(private http: HttpClient) { }
   getSkills(key:string):Observable<any> {
     return this.http.get<any>("http://localhost:8000/skill/" +key );
 }
+getEmployeeSchedule(e_id:string):Observable<any>{
+
+  return this.http.get<any>("http://localhost:8000/employeeSchedule/"+e_id);
+
+}
 }

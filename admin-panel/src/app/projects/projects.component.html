@@ -4,9 +4,53 @@
       <div class="page__content-data position-absolute text-center">
         <div class="overview">
             <div style="text-align:center; padding: 15px; ">
-                <button (click)='create()'>Add New</button>
-              </div>
+                <button (click)="open(addNProject)">Add New</button>
+            </div>
             
+            <ng-template #addNProject let-modal>
+              <div class="modal-header">
+                  <h4 class="modal-title" 
+                      id="modal-basic-title">
+                      Add New Project
+                  </h4>
+                  <button type="button" class="close"
+                          aria-label="Close" (click)=
+                          "modal.dismiss('Cross click')">
+            
+                      <span aria-hidden="true">
+                          ×
+                      </span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-group">
+                          <label>Project ID</label>
+                          <input class="form-control" name="p_id" [(ngModel)]="p_add.project_id" >
+                          
+                          <label>Project Name</label>
+                          <input class="form-control" name="p_name" [(ngModel)]="p_add.project_name" >
+                          
+                          <label>Customer Name</label>
+                          <input class="form-control" name="c_name" [(ngModel)]="p_add.customer_name" >
+            
+                          <label>Status</label>
+                          <input class="form-control" name="status" [(ngModel)]="p_add.status" >
+            
+                          <label>POD ID</label>
+                          <input class="form-control" name="pod_id" [(ngModel)]="p_add.pod_id" >
+            
+                          <label>Start Date</label>
+                          <input class="form-control" type="date" name="start_date" [(ngModel)]="p_add.start_date" >
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button (click)="addProject();refresh()" class="btn btn-outline-dark" >Submit</button>
+              </div>
+            </ng-template>
+
+
             <div class="overview-head">
               <div class="overview-cell center" style="padding: 10px;">PROJECT ID</div>
               <div class="overview-cell center" style="padding: 10px;">PROJECT NAME</div>
@@ -64,5 +108,5 @@
   </div>
 <!-- <h3 style="text-align:center;"></h3> -->
 
- 
+
   

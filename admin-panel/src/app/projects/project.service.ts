@@ -13,4 +13,7 @@ export class ProjectService {
   getprojectsByCustomerName(customerName:string): Observable<Project[]> {
     return this.http.get<Project[]>(environment.apiUrl + '/projectsof/'+ customerName);
   }
+  addProject(p_add: Project): Observable<Project> {
+    return this.http.post<Project>(environment.apiUrl + '/addproject', p_add);
+  }
 }

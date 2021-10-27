@@ -32,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmpFilterPipe } from './empproject/EmpFilter.pipe';
 import { TimecardComponent } from './projects/timecard/timecard.component';
 import { DatePipe } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ChartsModule,
     NgbModule,
+    MatExpansionModule,
   ],
   providers: [PodComponent,DatePipe],
   bootstrap: [AppComponent],

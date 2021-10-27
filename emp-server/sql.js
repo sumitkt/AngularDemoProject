@@ -164,6 +164,18 @@ addEmp = function(request,callback) {
     }).then(emp => callback(emp));
 }
 
+addProject = function(request,callback) {
+    models.projects.create({
+        project_id: request.project_id,
+        project_name: request.project_name,
+        customer_name: request.customer_name,
+        status: request.status,
+        pod_id: request.pod_id,
+        start_date: request.start_date,
+        
+    }).then(emp => callback(emp));
+}
+
 getclients = function(callback){
     models.customer.findAll().then(client => callback(client));
 }
@@ -355,6 +367,26 @@ findRemHours= function(request,callback){
     }).then( result => callback(result));
 }
 
+findEmployeeSchedule=function(request,callback){   
+     // this function need to be modified  
+       models.empprojects.findAll({    
+             where:{            e_id:request.e_id,    
+                    //date:{[Op.between]:['2021-10-25','2021-10-31']}      
+               },      
+                 include: [{            model: models.projects,
+                        required: true,           
+            
+            attributes:['project_name','customer_name'],       
+                  as: "project"           }],  
+                     attributes:[ 'project_id'],     })
+            .then( result => {     
+                   //console.log(result[1].work_hours); 
+                                callback(result); 
+                   });
+                }
+
+
+
 module.exports.init = init;
 
 module.exports.getEmpProject=getEmpProject;
@@ -377,3 +409,5 @@ module.exports.updateempProjects=updateempProjects;
 module.exports.findcurrentschedule=findcurrentschedule;
 module.exports.findRemHours=findRemHours;
 module.exports.podByProject=podByProject;
+module.exports.findEmployeeSchedule=findEmployeeSchedule;
+module.exports.addProject=addProject;

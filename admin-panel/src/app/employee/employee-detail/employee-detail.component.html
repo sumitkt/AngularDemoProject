@@ -1,31 +1,52 @@
-<div class="container-fluid page">
-  <div class="d-flex page__box p-3 mt-1 " style="color: white;">Employee Profile</div>
-  <!-- <div class="page__content shadow p-3 position-relative"> -->
-    <div class="page__content-data position-absolute text-center">
-      <div class="card">
-        <div class="card-body" >
-          <div style="margin-right: 60px; padding-top: 20px;">
-            <img [src]='employee.emp_image' />
-          </div>
-          <div>
-            <h3>
-              {{ employee.e_name }}<hr>
-            </h3>
-            
-          <div class="info"> 
-              <div class="info-cell">Employee ID: <span class="emp-details">{{employee.e_id}}</span></div>
-              <div class="info-cell">POD ID: <span class="emp-details">{{employee.pod_id}}</span></div>
-              <div class="info-cell">Manager ID: <span class="emp-details">{{employee.manager_id}}</span></div>
-          </div>
-            
-          <button> <a routerLink="/emp/employeelist/edit/{{ employee.e_id }}">Edit</a></button>
-          <button style="margin-left:10px;"> <a routerLink="/dashboard">Employee List</a></button>
-          </div>
-        </div>
-      </div>
-      
-      <app-empskills></app-empskills>
-    </div>
+
+<div class="container-fluid page" style="background-color: silver;"> 
+  <div class="d-flex page__box p-3 mt-1 " style="color: white;">
+    Employee Profile
+  </div> 
+  <div class="card">    
+    <div class="card-body" >     
+      <div style="margin-right: 40px; padding-top: 20px;">    
+        <img [src]='employee.emp_image' />      
+      </div>       
+      <div>  
+        <h3>   
+          {{ employee.e_name }}<hr>   
+        </h3>                 
+        <div class="info">        
+          <div class="info-cell">Employee ID: <span class="emp-details">{{employee.e_id}}</span></div>        
+          <div class="info-cell">POD ID: <span class="emp-details">{{employee.pod_id}}</span></div>     
+          <div class="info-cell">Manager ID: <span class="emp-details">{{employee.manager_id}}</span></div>      
+        </div>    
+        <button> <a routerLink="/emp/employeelist/edit/{{ employee.e_id }}">Edit</a></button>   
+        <button style="margin-left:10px;"> <a routerLink="/dashboard">Employee List</a></button>  
+      </div>  
+    </div> 
+  </div>
+  <br> 
+  <br>
+  <br>  
+  <mat-accordion >     
+    <div *ngFor="let i of schedule">  
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>         
+          <mat-panel-title>
+            Project Name: {{i[1]}}  
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            Project ID: {{i[0]}}         
+          </mat-panel-title>  
+          <mat-panel-description>      
+            Client Name: {{i[2]}}       
+          </mat-panel-description>       
+        </mat-expansion-panel-header>     
+        <p>This is the primary content of the panel.</p> 
+      </mat-expansion-panel>      
+                       <!-- <mat-expansion-panel (opened)="panelOpenState = true"  
+                                             (closed)="panelOpenState = false">     
+                                 <p>I'm visible because I am open</p>    
+                      </mat-expansion-panel> -->   
+    </div>   
+  </mat-accordion>
+
   <!-- </div> -->
 </div>
 
