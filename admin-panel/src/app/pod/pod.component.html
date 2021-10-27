@@ -9,7 +9,7 @@
 </div> 
 </div>  -->
 
-<div class="overview">
+<!-- <div class="overview">
   <div style="text-align:center; margin-bottom: 15px;">
     <button (click)='create()'>Add New</button>
   </div>
@@ -17,7 +17,6 @@
   <div class="overview-head">
     <div class="overview-cell center" style="padding: 10px;">POD name</div>
     <div class="overview-cell center" style="padding: 10px;">POD Id </div>
-    <!-- <div class="overview-cell center" style="padding: 10px;">POD ID</div> -->
     <div class="overview-cell center" style="padding: 10px;">Manager ID</div>
     <div class="overview-cell center" style="padding: 10px;">Manager Name</div>
     <div class="overview-cell center" style="padding: 10px;"></div>
@@ -28,16 +27,35 @@
   <div class="overview-row" *ngFor = "let emp of pod"> 
     <div class="overview-cell center">{{ emp.p_name }}</div>
     <div class="overview-cell center">{{ emp.pod_id }}</div>
-    <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
+   <div class="overview-cell center">{{ p.pod_id}}</div> 
     <div class="overview-cell center">{{ emp.manager_id}}</div>
     <div class="overview-cell center">{{ emp.manager.e_name}}</div>
     <div class="overview-cell center">
      <button style="margin-right: 10px;"> <a routerLink="details/{{ emp.pod_id }}">Details</a></button>
      <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button>
     </div>
-    
-
   </div>
-    
-      
+</div> -->
+<div class="podviewmain">
+  <button class="btn btn-primary add" (click)='create()'>Add New</button>
+  <table class="table table-striped podview">
+    <thead>
+      <tr class="theader">
+        <th scope="col">POD Name</th>
+        <th scope="col">POD ID</th>
+        <th scope="col">Manager ID</th>
+        <th scope="col">Manager Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let emp of pod">
+        <td>{{ emp.p_name }}</td>
+        <td>{{ emp.pod_id }}</td>
+        <td>{{ emp.manager_id}}</td>
+        <td>{{ emp.manager.e_name}}</td>
+        <button class="btn btn-sm btn-primary"><a routerLink="details/{{ emp.pod_id }}">Details</a></button>
+        <button class="btn btn-sm btn-primary"> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button>
+      </tr>
+    </tbody>
+  </table>
 </div>
