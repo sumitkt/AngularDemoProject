@@ -1,3 +1,4 @@
+const { response } = require('express');
 const {Sequelize,Op} = require('sequelize');
 // const employee = require('./employee');
 // const pod = require('./pod');
@@ -178,6 +179,9 @@ getprojectsBycustomerName = function(request,callback){
 
 getEmpProject = function(request,callback){
 
+    console.log(typeof request.status);
+    if( request.status === 'Ongoing'){
+
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
         var dd = this.getDate();
@@ -232,6 +236,24 @@ getEmpProject = function(request,callback){
         callback(result);
     });
 }
+else{
+    models.empprojects.findAll({
+        where:{
+            project_id:request.project_id
+        },
+       
+        include: [{
+            model: models.employee,
+            required: true,
+            as: "e"
+           }],
+        attributes:['e_id','project_id',[sequelize.fn('sum', sequelize.col('work_hours')), 'totalworkinghours']],   
+        group:['empprojects.e_id','empprojects.project_id']
+    }).then(result =>{
+        callback(result);
+    });
+}
+}
 updateempProjects = function(request, callback) {
     //console.log("*******************");
     //console.log(request[0].work_hours);
@@ -254,6 +276,7 @@ updateempProjects = function(request, callback) {
         }).then(result => {
             //console.log("i="+i);
             console.log(result[0]);
+            console.log(result);
             if((result[0].total_hours + request[i].work_hours) >8){
                 flag=true;
                 return flag;

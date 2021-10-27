@@ -72,6 +72,7 @@ export class EmpprojectComponent implements OnInit {
     public datepipe: DatePipe,
   ) { }
 
+
   open(content: any) {
     this.modalService.open(content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -81,6 +82,11 @@ export class EmpprojectComponent implements OnInit {
          `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
+  status='';
+
+  empproject:EmpProject[];
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -108,6 +114,13 @@ export class EmpprojectComponent implements OnInit {
     this.getEmployees();
     this.route.params.subscribe(params =>{
       const p_id=params.project_id;
+       this.status= params.status;
+      //console.log(status);
+
+      // if(params.status){
+      //   const status= params.status;
+      // }
+
       const project_id=String(p_id);
 
       this.Project_ID=params.project_id;
@@ -264,4 +277,12 @@ export class EmpprojectComponent implements OnInit {
   }
 }
 
+      this.empprojectservice.getEmpProjects(project_id,this.status).subscribe(empproject=> {
+          this.empproject=empproject;
+        });
+      
+    })
+  
+  }
 
+  }

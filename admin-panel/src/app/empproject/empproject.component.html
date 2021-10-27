@@ -1,3 +1,64 @@
+<div *ngIf="status ==='Completed'; then CompletedBlock else OngoingBlock"></div>
+<ng-template #CompletedBlock>
+
+<!-- <div style="text-align: right">
+    <button (click)='create()'>Add New</button>
+  </div> -->
+  <!-- <h3 style="text-align:center;">PROJECT ID: {{empproject[0].project_id}}</h3> -->
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-1 " style="color: white;">Project ID: {{empproject[0].project_id}}</div>
+    <!-- <div class="page__content shadow p-3 position-relative"> -->
+      <div class="page__content-data position-absolute text-center">
+        <div class="overview">
+  
+    
+            <div class="overview-head">
+              <div class="overview-cell center" style="padding: 10px;">Employee</div>
+              <div class="overview-cell center" style="padding: 10px;">Employee Name</div>
+              <div class="overview-cell center" style="padding: 10px;">POD-ID</div>
+              <div class="overview-cell center" style="padding: 10px;">Working Hours</div>
+              <!-- <div class="overview-cell center" style="padding: 10px;">Date</div> -->
+              <!-- <div class="overview-cell center" style="padding: 10px;">Date</div> -->
+              <div class="overview-cell center" style="padding: 10px;"></div>
+              <!-- <div class="overview-cell center" style="padding: 10px;">STATUS</div>
+              
+              <div class="overview-cell center" style="padding: 10px;"></div> -->
+            </div> 
+           
+          
+            <div class="overview-row" *ngFor = "let ep of empproject"> 
+              
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e_id }}</div>
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e.e_name }}</div>
+              <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.e.pod_id}}</div>
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.totalworkinghours}}</div>
+              <!-- <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.date}}</div> -->
+              <!-- <div class="overview-cell center">{{ p.status}}</div> -->
+              <!-- <div class="overview-cell center" style="padding: 10px;text-align:center;">{{ ep.project_id }}</div> -->
+              <div class="overview-cell center" style="padding: 10px;text-align:center;">
+                
+                
+               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}">Details</a></button>
+               <button style="margin-right: 10px;"> <a routerLink="/emp/employeelist/{{ ep.e_id}}/{{ep.project_id}}">Export</a></button>
+               <!-- <button> <a routerLink="/home/editpod/{{ emp.pod_id }}">Edit</a></button> -->
+              </div>
+              
+          
+            </div>
+              
+                
+          </div>
+          
+          
+      </div>
+    <!-- </div> -->
+  </div>
+  
+
+
+</ng-template>
+<ng-template #OngoingBlock>
 
 <!-- <div style="text-align: right">
     <button (click)='create()'>Add New</button>
@@ -154,3 +215,5 @@
   </div>
   
 
+
+</ng-template>
