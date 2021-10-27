@@ -1,6 +1,6 @@
 
 
-<div class="overview">
+<!-- <div class="overview">
   
   <div style="text-align:left; margin-bottom: 5px;">
     <button (click)='create()'>Add New</button>
@@ -15,7 +15,7 @@
   </div> 
   
 
-  <div class="overview-row" *ngFor = "let emp of employees"> 
+  <div class="overview-row" *ngFor = "c"> 
     <div class="overview-cell center">{{ emp.e_id}}</div>
     <div class="overview-cell center">{{ emp.e_name}}</div>
     <div class="overview-cell center">{{ emp.pod_id}}</div>
@@ -29,5 +29,28 @@
   </div>
     
       
-</div>
+</div> -->
 
+<div class="podviewmain">
+  <button class="btn btn-primary add" (click)='create()'>Add New</button>
+  <table class="table table-striped podview">
+    <thead>
+      <tr class="theader">
+        <th scope="col">Employee ID</th>
+        <th scope="col">Employee Name</th>
+        <th scope="col">POD ID</th>
+        <th scope="col">Manager ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let emp of employees">
+        <td>{{ emp.e_id }}</td>
+        <td>{{ emp.e_name }}</td>
+        <td>{{ emp.pod_id}}</td>
+        <td>{{ emp.manager_id}}</td>
+        <button class="btn btn-sm btn-primary"><a routerLink="/emp/employeelist/{{ emp.e_id }}">Details</a></button>
+        <button class="btn btn-sm btn-primary"> <a routerLink="/emp/employeelist/edit/{{ emp.e_id }}">Edit</a></button>
+      </tr>
+    </tbody>
+  </table>
+</div>

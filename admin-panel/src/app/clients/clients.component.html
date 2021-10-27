@@ -2,7 +2,33 @@
     <div class="d-flex page__box p-3 mt-1 " style="color: white;">Client View</div>
     <!-- <div class="page__content shadow p-3 position-relative"> -->
       <div class="page__content-data position-absolute text-center">
-        <div class="overview">
+        <div class="podviewmain">
+          <button class="btn btn-primary add" (click)='create()'>Add New</button>
+          <table class="table table-striped podview">
+            <thead>
+              <tr class="theader">
+                <th scope="col">Client ID</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor = "let c of clients">
+                <td>{{ c.customer_id }}</td>
+                <td>{{ c.customer_name }}</td>
+                <td>{{ c.phone_no}}</td>
+                <td>{{ c.email_id}}</td>
+                <button class="btn btn-sm btn-primary"><a routerLink="/projectof/{{c.customer_name}}">Details</a></button>
+                <button class="btn btn-sm btn-primary"> <a routerLink="#">Edit</a></button>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+        <!-- <div class="overview">
             <div style="text-align: center;padding: 15px;">
                 <button (click)='create()'>Add New</button>
               </div>
@@ -10,7 +36,7 @@
             <div class="overview-head">
               <div class="overview-cell center" style="padding: 10px;">Client Id</div>
               <div class="overview-cell center" style="padding: 10px;">Client Name </div>
-              <!-- <div class="overview-cell center" style="padding: 10px;">POD ID</div> -->
+              
               <div class="overview-cell center" style="padding: 10px;">Phone</div>
               <div class="overview-cell center" style="padding: 10px;">Email</div>
               <div class="overview-cell center" style="padding: 10px;"></div>
@@ -21,7 +47,7 @@
             <div class="overview-row" *ngFor = "let c of clients"> 
               <div class="overview-cell center">{{ c.customer_id }}</div>
               <div class="overview-cell center">{{ c.customer_name }}</div>
-              <!-- <div class="overview-cell center">{{ p.pod_id}}</div> -->
+              
               <div class="overview-cell center">{{ c.phone_no}}</div>
               <div class="overview-cell center">{{ c.email_id}}</div>
               <div class="overview-cell center">
@@ -34,7 +60,7 @@
               
                 
           </div>
-      </div>
+      </div> -->
     <!-- </div> -->
   </div>
 

@@ -16,7 +16,29 @@
     margin: 10px auto;
     border-collapse: collapse;
 }
+.podview{
 
+    width: max-content;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    /* font-size: 50%; */
+    border-radius: 5%;
+}
+
+.podviewmain{
+    margin-left: 20%;
+    
+}
+
+
+.theader {
+    background-color: rgb(33, 178, 214);
+    color: white;
+} 
+.add{
+    margin: 1rem;
+    
+}
 
 
 .overview-head {

@@ -85,7 +85,6 @@ export class EmpprojectComponent implements OnInit {
 
   status='';
 
-  empproject:EmpProject[];
 
 
   private getDismissReason(reason: any): string {
@@ -128,7 +127,7 @@ export class EmpprojectComponent implements OnInit {
           this.PROJECT=project;
       });
       
-      this.empprojectservice.getEmpProjects(project_id).subscribe(empproject=> {
+      this.empprojectservice.getEmpProjects(project_id,this.status).subscribe(empproject=> {
           this.empproject=empproject;
         });
     });
@@ -276,13 +275,3 @@ export class EmpprojectComponent implements OnInit {
     });
   }
 }
-
-      this.empprojectservice.getEmpProjects(project_id,this.status).subscribe(empproject=> {
-          this.empproject=empproject;
-        });
-      
-    })
-  
-  }
-
-  }
